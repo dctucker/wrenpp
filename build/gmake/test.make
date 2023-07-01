@@ -10,6 +10,8 @@ endif
 
 .PHONY: clean prebuild prelink
 
+ARCHBITS = -m64
+
 ifeq ($(config),debug)
   ifeq ($(origin CC), default)
     CC = clang
@@ -24,15 +26,15 @@ ifeq ($(config),debug)
   TARGET = $(TARGETDIR)/test
   OBJDIR = obj/Debug/test
   DEFINES += -DDEBUG
-  INCLUDES += -I../.. -I../../test -I../../wren-master/src/include
+  INCLUDES += -I../.. -I../../test -I../../wren-main/src/include
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g -std=c++14
-  ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -g -std=c++14
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ARCHBITS) -g -std=c++14
+  ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ARCHBITS) -g -std=c++14
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += ../../lib/Debug/libwrenpp.a -lwren
   LDDEPS += ../../lib/Debug/libwrenpp.a
-  ALL_LDFLAGS += $(LDFLAGS) -L../../wren-master/lib -m64
+  ALL_LDFLAGS += $(LDFLAGS) -L../../wren-main/lib $(ARCHBITS)
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
 	@echo Running prebuild commands
@@ -61,15 +63,15 @@ ifeq ($(config),release)
   TARGET = $(TARGETDIR)/test
   OBJDIR = obj/Release/test
   DEFINES += -DNDEBUG
-  INCLUDES += -I../.. -I../../test -I../../wren-master/src/include
+  INCLUDES += -I../.. -I../../test -I../../wren-main/src/include
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -std=c++14
-  ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -std=c++14
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ARCHBITS) -O2 -std=c++14
+  ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ARCHBITS) -O2 -std=c++14
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += ../../lib/Release/libwrenpp.a -lwren
   LDDEPS += ../../lib/Release/libwrenpp.a
-  ALL_LDFLAGS += $(LDFLAGS) -L../../wren-master/lib -m64
+  ALL_LDFLAGS += $(LDFLAGS) -L../../wren-main/lib $(ARCHBITS)
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
 	@echo Running prebuild commands
@@ -98,15 +100,15 @@ ifeq ($(config),test)
   TARGET = $(TARGETDIR)/test
   OBJDIR = obj/Test/test
   DEFINES +=
-  INCLUDES += -I../.. -I../../test -I../../wren-master/src/include
+  INCLUDES += -I../.. -I../../test -I../../wren-main/src/include
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -std=c++14
-  ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -std=c++14
+  ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) $(ARCHBITS) -std=c++14
+  ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) $(ARCHBITS) -std=c++14
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
   LIBS += ../../lib/Test/libwrenpp.a -lwren
   LDDEPS += ../../lib/Test/libwrenpp.a
-  ALL_LDFLAGS += $(LDFLAGS) -L../../wren-master/lib -m64
+  ALL_LDFLAGS += $(LDFLAGS) -L../../wren-main/lib $(ARCHBITS)
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
 	@echo Running prebuild commands

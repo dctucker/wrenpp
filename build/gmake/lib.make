@@ -24,7 +24,7 @@ ifeq ($(config),debug)
   TARGET = $(TARGETDIR)/libwrenpp.a
   OBJDIR = obj/Debug/lib
   DEFINES += -DDEBUG
-  INCLUDES += -I../../wren-master/src/include -I../../src
+  INCLUDES += -I../../wren-main/src/include -I../../src
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g -std=c++14
@@ -59,7 +59,7 @@ ifeq ($(config),release)
   TARGET = $(TARGETDIR)/libwrenpp.a
   OBJDIR = obj/Release/lib
   DEFINES += -DNDEBUG
-  INCLUDES += -I../../wren-master/src/include -I../../src
+  INCLUDES += -I../../wren-main/src/include -I../../src
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -std=c++14
@@ -94,7 +94,7 @@ ifeq ($(config),test)
   TARGET = $(TARGETDIR)/libwrenpp.a
   OBJDIR = obj/Test/lib
   DEFINES +=
-  INCLUDES += -I../../wren-master/src/include -I../../src
+  INCLUDES += -I../../wren-main/src/include -I../../src
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -std=c++14
